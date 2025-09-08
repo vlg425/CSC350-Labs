@@ -30,7 +30,7 @@ class StudentGroup
         studentNames = new string[maxGroupSize];
     }
 
-    //Add student function: pass a name and it gets added to student Names array, incremients current student count
+    //Add student function: pass a name and it gets added to student Names array, incremients current student
     public void AddStudent(string name)
     {
         if (currentStudentCount < maxGroupSize)
@@ -44,18 +44,32 @@ class StudentGroup
         }
     }
 
-
+    //Get student function: pass position, retrieves name of student at that location in array, checks that it is between 0 and current student count
     public void GetStudent(int position)
     {
-        
+        if (position >= 0 && position < currentStudentCount)
+        {
+            Console.WriteLine($"{studentNames[position]}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid position.");
+        }
     }
 
 
+    //show student function: prints group name then iterates through student names and prints all studetns in group
     public void ShowStudents()
     {
-       
+        Console.WriteLine($"Group: {groupName}");
+        for (int i = 0; i < currentStudentCount; i++)
+        {
+            Console.WriteLine($"- {studentNames[i]}");
+        }
     }
 }
+
+
 
 
 
