@@ -69,6 +69,29 @@ class StudentGroup
     }
 }
 
+class Program
+{
+    static void Main()
+    {
+        StudentGroup group1 = new StudentGroup("Team Alpha", 3);
+        group1.AddStudent("Alice");
+        group1.AddStudent("Bob");
+        group1.AddStudent("Charlie");
+
+        group1.ShowStudents();
+        Console.WriteLine();
+
+        Console.WriteLine("Student at positon 0: ");
+        group1.GetStudent(0);
+        Console.WriteLine();
+
+        Console.WriteLine("Student at positon -1: ");
+        group1.GetStudent(-1);
+        Console.WriteLine();
+        
+        group1.AddStudent("Denise");
+    }
+}
 
 
 
