@@ -46,7 +46,7 @@ public class Player
     // Remove by index; returns true if a card was removed and sets removedCard.
     public bool TryRemoveAt(int index, out Card removedCard)
     {
-        removedCard = null;
+        removedCard = new Card(Rank.Ace, Suit.Spades); // default value
 
         if (index < 0 || index >= _hand.Count)
         {
@@ -112,20 +112,25 @@ class Program
         Player playerOne = new Player("Player 1");
 
         // 1) Initialization
+        Console.WriteLine("\n1) Initialization:");
         playerOne.DisplayHand();
         Console.WriteLine($"card count: {playerOne.CardCount}");
         Console.WriteLine();
 
         // 2) Add Card to Player (draw 1)
+        Console.WriteLine("\n2) Add Card to Player(draw 1):");
         playerOne.DrawFrom(gameDeck, 1);
         playerOne.DisplayHand();
         Console.WriteLine();
+
         // 3) Remove Card from Player (remove index 0)
+        Console.WriteLine("\n3) Remove Card from Player (remove index 0):");
         bool removedOk = playerOne.TryRemoveAt(0, out Card removedCard);
         playerOne.DisplayHand();
         Console.WriteLine();
 
         // 4) Card Count (draw 3, then remove 1)
+        Console.WriteLine("\n4) Card Count(draw 3, then remove 1):");
         playerOne.DrawFrom(gameDeck, 3);
         playerOne.DisplayHand();
         Console.WriteLine();
@@ -135,13 +140,14 @@ class Program
 
         // 5) Index Validation (try invalid index)
         bool indexValid = playerOne.IsValidIndex(999);
-        
+        Console.WriteLine("\n5) Index Validation (try invalid index):");
         removedOk = playerOne.TryRemoveAt(999, out removedCard);
         playerOne.DisplayHand();
         Console.WriteLine();
         
 
         // 6) Empty Hand Check (remove all cards)
+        Console.WriteLine("\n6) Empty Hand Check(remove all cards):");
         while (playerOne.HasCards)
         {
             playerOne.TryRemoveAt(0, out removedCard);
@@ -151,34 +157,41 @@ class Program
         
         // 7) Display Cards (draw 2 and show)
         playerOne.DrawFrom(gameDeck, 2);
-        Console.WriteLine("\n7) Display:");
+        Console.WriteLine("\n7) Display(draw 2 and show):");
         playerOne.DisplayHand();
 
         // 8) Sorting by Card Value (rank then suit)
+        Console.WriteLine("\n8) Sorted hand(rank then suit):");
         playerOne.DrawFrom(gameDeck, 3); // make sure we have a few cards
-        int handSizeBeforeSort = playerOne.CardCount;
+        playerOne.DisplayHand();
         playerOne.SortHand();
         
-        Console.WriteLine("\n8) Sorted hand:");
         playerOne.DisplayHand();
 
         // 9) Multiple Deals
+         Console.WriteLine("\n9) Multiple Deals:");
         Player playerTwo = new Player("Player 2");
         playerTwo.DrawFrom(gameDeck, 5);
-        
+        playerOne.DisplayHand();
+        playerTwo.DisplayHand();
+
 
         // 10) Handling Duplicate Cards
+        Console.WriteLine("\n10) Handling Duplicate Cards:");
         Player duplicateTester = new Player("Duplicate Tester");
         Card tenOfDiamonds = new Card(Rank.Ten, Suit.Diamonds);
         duplicateTester.Add(tenOfDiamonds);
         duplicateTester.Add(tenOfDiamonds);
+        duplicateTester.DisplayHand();
         
         bool removedOneDuplicate = duplicateTester.Remove(tenOfDiamonds);
-        
+
 
         // 11) Removing Non-Existent Card
+        Console.WriteLine("\n11) Removing Non-Existent Card:");
         Card aceOfSpades = new Card(Rank.Ace, Suit.Spades);
         bool removedMissing = duplicateTester.Remove(aceOfSpades);
+        duplicateTester.DisplayHand();
         
 
         Console.WriteLine("\nAll tests finished.");
